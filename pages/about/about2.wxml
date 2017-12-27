@@ -1,0 +1,7 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">关于</view>
+        <view class="page__desc">    商超促销助手是一款针对超市促销员推出的微信小程序，旨在帮助促销员个人解决工作中的一些实际问题，如门店管理、会员管理、销量管理。</view>
+        <view class="page__desc">    让商超促销工作更轻松！更规范！</view>
+    </view>
+</view>

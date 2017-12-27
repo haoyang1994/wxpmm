@@ -1,0 +1,27 @@
+<!--九宫格 入口模版-->
+<template name="grid">
+
+    <view style="background-image: url('../../asset/image/icons/back.png');background-size: cover;">
+        <view class="weui-grids" >
+            <block wx:for="{{wxGridData.special}}" wx:key="*this">
+                <navigator url="../form/form?formId={{item.id}}" class="weui-grid" hover-class="weui-grid_active">
+                    <view class="weui-grid__icon" style="border-radius: 50%;width:50px;height:50px;background-color: #FFFFFF;">
+                      <image class="weui-grid__icon" style="padding:10px;" src="../../asset/image/icons/{{item.icon}}.png"/>
+                    </view>
+                    <view class="weui-grid__label">{{item.name}}</view>
+                </navigator>
+            </block>
+        </view>
+    </view>
+
+    <view>
+        <view class="weui-grids">
+            <block wx:for="{{wxGridData.common}}" wx:key="*this">
+                <navigator url="../form/form?formId={{item.id}}" class="weui-grid" hover-class="weui-grid_active">
+                    <image class="weui-grid__icon" src="../../asset/image/icons/{{item.icon}}.png" />
+                    <view class="weui-grid__label">{{item.name}}</view>
+                </navigator>
+            </block>
+        </view>
+    </view>
+</template>

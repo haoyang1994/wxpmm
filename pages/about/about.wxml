@@ -1,0 +1,8 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">账号申请说明:</view>
+        <view class="page__desc">1. 本小程序暂不开放注册。</view>
+        <view class="page__desc">2. 个人申请账号请联系邮箱：yanghao@wxchina.com。</view>
+        <view class="page__desc">*3. 日常售卖产品与品类请与账号申请一并发送至邮箱，小程序内不提供产品管理功能模块。</view>
+    </view>
+</view>

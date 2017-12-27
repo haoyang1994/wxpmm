@@ -1,0 +1,173 @@
+<import src="table.wxml"/>
+<import src="grid.wxml"/>
+
+<!--入口模版-->
+<template name="wxParse">
+  <scroll-view wx:for="{{wxParseData}}" wx:key="">
+    <template is="wxParse0" data="{{item}}" />
+  </scroll-view>
+</template>
+
+<!--区分控件类型-->
+<template name="wxParse0">
+  <block wx:if="{{item.type==\"text\"}}">
+    <template is="wxParseText" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"textArea\"}}">
+    <template is="wxParseTextArea" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"number\"}}">
+    <template is="wxParseNumber" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"date\"}}">
+    <template is="wxParseDate" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"time\"}}">
+    <template is="wxParseTime" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"image\"}}">
+    <template is="wxParseImage" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"select\"}}">
+    <template is="wxParseSelect" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"button\"}}">
+    <template is="wxParseButton" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"list\"}}">
+    <template is="wxParseList" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"table\"}}">
+    <template is="wxParseTable" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"grid\"}}">
+    <template is="wxParseGrid" data="{{item}}" />
+  </block>
+  <block wx:if="{{item.type==\"tab\"}}">
+    <template is="wxParseTab" data="{{item}}" />
+  </block>
+</template>
+
+<!--text模版-->
+<template name="wxParseText">
+  <!--普通文本-->
+  <view class="weui-cell weui-cell_input" hidden="{{item.hidden}}">
+      <view class="weui-cell__hd" hidden="{{(item.required&&!item.value)}}">
+        <view class="weui-label">{{item.name}}</view>
+    </view>
+    <view class="weui-cell__hd weui-cell_warn" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+        <view class="weui-label">{{item.name}}</view>
+    </view>
+    <view class="weui-cell__bd">
+        <input bindchange="bindDataChange" id="{{item.id}}" class="weui-input" placeholder="{{!item.disabled?\"请输入\":\"\"}}" value="{{item.value}}" disabled="{{!!item.disabled}}"/>
+    </view>
+    <view class="weui-cell__ft" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+    </view>
+  </view>
+</template>
+
+<!--textarea模版-->
+<template name="wxParseTextArea">
+  <!--普通文本-->
+  <block hidden="{{item.hidden}}">
+      <view class="weui-cells__title">{{item.name}}</view>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea  bindinput="bindDataChange" id="{{item.id}}" class="weui-textarea" placeholder="{{item.placeholder}}" style="height: 3.3em" value="{{item.value}}" disabled="{{item.disabled}}" maxlength="{{item.maxlength}}"/>
+                <view wx:if="{{!item.disabled}}" class="weui-textarea-counter">{{item.value?item.value.length:0}}/{{item.maxlength}}</view>
+            </view>
+        </view>
+      </view>
+  </block>
+</template>
+
+
+<!--number模版-->
+<template name="wxParseNumber">
+  <view class="weui-cell weui-cell_input" hidden="{{item.hidden}}">
+      <view class="weui-cell__hd" hidden="{{(item.required&&!item.value)}}">
+        <view class="weui-label">{{item.name}}</view>
+      </view>
+      <view class="weui-cell__hd weui-cell_warn" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+          <view class="weui-label">{{item.name}}</view>
+      </view>
+    <view class="weui-cell__bd">
+        <input type="number" bindchange="bindDataChange" id="{{item.id}}" class="weui-input" placeholder="{{!item.disabled?\"请输入\":\"\"}}" value="{{item.value}}" disabled="{{!!item.disabled}}"/>
+    </view>
+    <view class="weui-cell__ft" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+    </view>
+  </view>
+</template>
+
+
+ <!--单选模版-->
+<template name="wxParseSelect">
+    <view class="weui-cell weui-cell_input" hidden="{{item.hidden}}">
+      <view class="weui-cell__hd" hidden="{{(item.required&&!item.value)}}">
+        <view class="weui-label">{{item.name}}</view>
+      </view>
+      <view class="weui-cell__hd weui-cell_warn" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+          <view class="weui-label">{{item.name}}</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="selector" value="{{item.placeholder}}" id="{{item.id}}" bindchange="selectChange" range="{{item.itemSetting.items}}" range-key="key"  disabled="{{!!item.disabled}}">
+        <view class="weui-input" id="{{item.id+\"\"}}">{{!!(item.key)?item.key:"请选择---"}}</view>
+        </picker>
+      </view>
+      <view class="weui-cell__ft" hidden="{{!(item.required)||(item.required&&!!item.value)}}">
+        <icon type="warn" size="23" color="#E64340"></icon>
+      </view>
+    </view>
+</template>       
+
+<!--date模版-->
+<template name="wxParseDate">
+    <view class="weui-cell weui-cell_input" hidden="{{item.hidden}}">
+      <view class="weui-cell__hd">
+          <view class="weui-label">{{item.name}}</view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker mode="date" value="{{item.placeholder}}" id="{{item.id}}" start="{{item.min}}" end="{{item.max}}" bindchange="bindDataChange" disabled="{{!!item.disabled}}">
+        <view class="weui-input" id="{{item.id+\"\"}}">{{item.value}}</view>
+        </picker>
+      </view>
+    </view>
+</template>
+
+
+<!--time模版-->
+<template name="wxParseTime">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <view class="weui-label">{{item.name}}</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker mode="time" value="{{item.placeholder}}" id="{{item.id}}" start="{{item.min}}" end="{{item.max}}" bindchange="bindDataChange" disabled="{{!!item.disabled}}">
+              <view class="weui-input" id="{{item.id+\"\"}}">{{item.value}}</view>
+            </picker>
+        </view>
+      </view>
+</template>
+
+<template name="wxParseList">
+      <view class="weui-cells__title">{{item.title}}</view>
+      <view class="weui-cells weui-cells_after-title" wx:for="{{item.datas}}" wx:key="{{id}}">
+          <navigator url="/pages/form/form?formId={{item.formId}}&&bizId={{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__bd">{{item.title}}</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access">{{item.subTitle}}</view>
+          </navigator>
+      </view>
+</template>
+
+<template name="wxParseTable">
+    <template is="table" data="{{table:item}}"/>
+</template>
+
+<template name="wxParseGrid">
+    <template is="grid" data="{{wxGridData:item}}"/>
+</template>
+
+

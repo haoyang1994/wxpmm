@@ -1,0 +1,12 @@
+
+<!--入口模版-->
+<template name="summit">
+  <view class="weui-flex weui-footer_fixed-bottom" style="margin-bottom">
+    <block wx:for="{{summit}}" wx:key="">
+      <template is="summit0" data="{{item}}" />
+    </block>
+  </view>
+</template>
+<template name="summit0">
+  <button style="margin:3px" id="{{item.id}}" class="weui_btn weui-flex__item" bindtap="summit" type="{{item.type}}">{{item.name}}</button>
+</template>

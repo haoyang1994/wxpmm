@@ -1,0 +1,15 @@
+<view class="page">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="success" size="93"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">操作成功</view>
+        </view>
+        <view class="weui-msg__opr-area">
+            <view class="weui-btn-area">
+                <button class="weui-btn" bindtap="back" type="primary">点击返回</button>
+            </view>
+        </view>
+    </view>
+</view>

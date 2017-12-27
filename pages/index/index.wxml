@@ -1,0 +1,56 @@
+<!--index.wxml-->
+<import src="/template/grid.wxml"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="weui-flex" style="height:52px;background:#AEDDA9">
+    <view>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="" hidden="{{true}}">{{userInfo.nickName}}</text>
+    </view>
+    <block wx:if="{{hasBind}}">
+      <picker class="weui-flex__item" bindchange="bindPickerChange" value="{{index}}" range="{{roles}}" range-key="roleName">
+          <button type="default" style="height:50px;background:#AEDDA9;border:none;margin:1px;">{{curRole.roleName}} <image class="weui-vcode-img" src="/asset/image/icons/arrow_switch.png" style="width: 15px;height:10px"></image></button>
+      </picker>
+      
+    </block>
+
+    <view wx:if="{{hasBind}}"> 
+      <view  class="weui-flex__item" type="default" size="mini" bindtap="unBind" style="background:#AEDDA9"><image class="weui-vcode-img" src="/asset/image/icons/exit.png" style="width: 15px;height:10px;margin:3px;"></image>注销</view>
+    </view>
+    
+  </view>
+  <block wx:if="{{!hasBind}}">
+    <view class="page__hd">
+        <view class="page__title">登录</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入账号" bindinput="setUsernumber" focus="true" type="number"></input>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入密码" bindinput="setPassword" focus="true" type="password"></input>
+          </view>
+        </view>
+        
+        <button wx:if="{{!hasBind}}" class="weui_btn" open-type="getUserInfo" bindtap="login" type="primary">点击登录</button>
+    </view>
+    <view class="page__title" style="height:10px"></view>
+    <view>
+        <navigator url="/pages/about/about" class="weui-footer__link">没有账号?点击这里
+        </navigator>
+    </view>    
+
+
+  </block>
+
+  <view class="page__bd" wx:if="{{hasBind}}">
+      <template is="grid" data="{{wxGridData:formList}}"/>
+  </view>
+  
+  <view class="weui-footer weui-footer_fixed-bottom">
+      <navigator url="/pages/about/about2" class="weui-footer__link">关于</navigator>
+      <view class="weui-footer__text">Copyright © 2017-2018 xw.Guangzhou      </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+<import src="../../template/form.wxml"/>
+<import src="../../template/summit.wxml"/>
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <template is="wxParse" data="{{wxParseData:form.jsonConfig.form}}"/>
+  <template is="summit" data="{{summit:form.jsonConfig.summit}}" />
+</view>

@@ -1,0 +1,23 @@
+<template name="table">
+  <view class="table">
+    
+    <view class="tr bg-w">
+      <block wx:for="{{table.th}}" wx:for-item="th">
+        <view class="th">{{th.name}}</view>
+      </block>
+    </view>
+  
+    <block wx:for="{{table.listData}}" wx:key="{{id}}" wx:for-item="data">
+      <view class="tr bg-g" wx:if="{{index % 2 == 1}}">
+        <block wx:for="{{table.th}}" wx:for-item="th">
+          <view class="td">{{data[th.key]}}</view>
+        </block>
+      </view>
+      <view class="tr" wx:else>
+        <block wx:for="{{table.th}}" wx:for-item="th">
+          <view class="td">{{data[th.key]}}</view>
+        </block>
+      </view>
+    </block>
+  </view>
+</template>
